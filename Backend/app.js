@@ -12,6 +12,7 @@ dotenv.config({ path: './config.env' });
 const app = express();
 
 // CORS setup - put it at the top, before other middlewares
+// Apply CORS for all routes
 app.use(cors({
   origin: [
     "http://127.0.0.1:5173",
@@ -27,21 +28,16 @@ app.use(cors({
   ]
 }));
 
+// Handle OPTIONS preflight requests globally
+app.use((req, res, next) => {
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE,PUT,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Cookie');
+    return res.sendStatus(204); // No Content
+  }
+  next();
+});
 
-app.options('*', cors({
-  origin: [
-    "http://127.0.0.1:5173",
-    "https://notes-scribe-mu.vercel.app"
-  ],
-  credentials: true,
-  methods: ["GET", "POST", "PATCH", "DELETE", "PUT", "OPTIONS"],
-  allowedHeaders: [
-    "Content-Type",
-    "Authorization",
-    "X-Requested-With",
-    "Cookie"
-  ]
-}));
 
 
 // Trust proxy for Render
