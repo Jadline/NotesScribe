@@ -11,6 +11,6 @@ export async function getmyNotes(){
 
     }catch(err){
         console.log('There was an error fetching your notes',err?.response.data || err.message)
-
+        throw err
     }
 }

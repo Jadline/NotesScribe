@@ -21,12 +21,13 @@ async function SignUp(req, res) {
     const token = signToken(user._id);
 
     const isDev = process.env.NODE_ENV !== 'production';
+    console.log('isDev',isDev)
 
 res.cookie("jwt", token, {
   expires: new Date(Date.now() + 90*24*60*60*1000),
   httpOnly: true,
-  secure: false,          // must be false on HTTP
-  sameSite: 'lax'         // Lax works for dev cross-site requests
+  secure: isDev ? false : true,         // must be false on HTTP
+  sameSite: isDev ? 'lax' : 'none'       // Lax works for dev cross-site requests
 });
     res.status(201).json({
       status: "success",
@@ -67,8 +68,8 @@ async function Login(req, res) {
 res.cookie("jwt", token, {
   expires: new Date(Date.now() + 90*24*60*60*1000),
   httpOnly: true,
-  secure: false,          // must be false on HTTP
-  sameSite: 'lax'         // Lax works for dev cross-site requests
+  secure: isDev ? false : true,          // must be false on HTTP
+  sameSite: isDev ? 'lax'  : 'none'       // Lax works for dev cross-site requests
 });
     res.status(200).json({
       status: "success",
