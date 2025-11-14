@@ -11,6 +11,39 @@ dotenv.config({ path: './config.env' });
 
 const app = express();
 
+// CORS setup - put it at the top, before other middlewares
+app.use(cors({
+  origin: [
+    "http://127.0.0.1:5173",
+    "https://notes-scribe-mu.vercel.app"
+  ],
+  credentials: true,
+  methods: ["GET", "POST", "PATCH", "DELETE", "PUT", "OPTIONS"],
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "X-Requested-With",
+    "Cookie"
+  ]
+}));
+
+
+app.options('*', cors({
+  origin: [
+    "http://127.0.0.1:5173",
+    "https://notes-scribe-mu.vercel.app"
+  ],
+  credentials: true,
+  methods: ["GET", "POST", "PATCH", "DELETE", "PUT", "OPTIONS"],
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "X-Requested-With",
+    "Cookie"
+  ]
+}));
+
+
 // Trust proxy for Render
 app.set('trust proxy', 1);
 
@@ -25,12 +58,7 @@ app.use('/api', limiter);
 // Security & middleware
 app.use(helmet());
 app.use(hpp());
-app.use(cors({
-  origin: [process.env.FRONTEND_URL],
-  credentials: true,
-  methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
-  allowedHeaders: ["Content-Type", "Cookie"]
-}));
+
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cookieParser());
