@@ -105,7 +105,7 @@ async function forgotPassword(req, res) {
     // const resetURL = `${req.protocol}://${req.get(
     //   "host"
     // )}/api/v1/account/resetPassword/${resetToken}}`;
-    const resetURL = `${req.protocol}://127.0.0.1:5173/resetPassword/${resetToken}}`;
+    const resetURL = `${process.env.FRONTEND_URL}/resetPassword/${resetToken}}`;
     const message = `Forgot your password ? reset it here ${resetURL}`;
 
     await sendEmail({
