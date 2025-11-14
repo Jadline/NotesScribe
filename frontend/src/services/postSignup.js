@@ -1,6 +1,6 @@
 import axios from 'axios'
-
-const SIGN_UP_URL = 'http://127.0.0.1:5000/api/v1/account/signup'
+const BASE_URL =  import.meta.env.VITE_BASE_URL
+const SIGN_UP_URL = `${BASE_URL}/api/v1/account/signup`
 
 export async function postSignup(signupdata){
     try{

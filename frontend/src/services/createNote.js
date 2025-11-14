@@ -1,6 +1,6 @@
 import axios from 'axios'
-
-const CREATE_NOTE_URL = 'http://127.0.0.1:5000/api/v1/notes'
+const BASE_URL =  import.meta.env.VITE_BASE_URL
+const CREATE_NOTE_URL = `${BASE_URL}/api/v1/notes`
 export async function createNote(data){
     try{
         const response = await axios.post(CREATE_NOTE_URL,data,{

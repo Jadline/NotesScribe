@@ -1,5 +1,6 @@
 import axios from 'axios'
-const RESET_PASSWORD_URL =  `http://127.0.0.1:5000/api/v1/account/resetPassword`
+const BASE_URL =  import.meta.env.VITE_BASE_URL
+const RESET_PASSWORD_URL =  `${BASE_URL}/api/v1/account/resetPassword`
 export async function patchResetPassword(token,data){
     try{
         const response = await axios.patch(`${RESET_PASSWORD_URL}/${token}`,data,{

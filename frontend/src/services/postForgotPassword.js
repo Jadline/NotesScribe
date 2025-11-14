@@ -1,5 +1,6 @@
 import axios from 'axios'
-const FORGOT_PASSWORD_URL = 'http://127.0.0.1:5000/api/v1/account/forgotPassword'
+const BASE_URL =  import.meta.env.VITE_BASE_URL
+const FORGOT_PASSWORD_URL = `${BASE_URL}/api/v1/account/forgotPassword`
 export async function postForgotPassword(data){
 
     try{

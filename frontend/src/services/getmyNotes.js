@@ -1,5 +1,6 @@
 import axios from 'axios'
-const GET_MY_NOTES_URL = 'http://127.0.0.1:5000/api/v1/notes'
+const BASE_URL =  import.meta.env.VITE_BASE_URL
+const GET_MY_NOTES_URL = `${BASE_URL}/api/v1/notes`
 export async function getmyNotes(){
     try{
         const response =await axios.get(GET_MY_NOTES_URL,{

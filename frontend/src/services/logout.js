@@ -1,5 +1,6 @@
 import axios from 'axios'
-const LOGOUT_URL = 'http://127.0.0.1:5000/api/v1/account/logout'
+const BASE_URL =  import.meta.env.VITE_BASE_URL
+const LOGOUT_URL = `${BASE_URL}/api/v1/account/logout`
 export async function logout(){
     try{
         const response = await axios.get(LOGOUT_URL,{

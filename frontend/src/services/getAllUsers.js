@@ -1,5 +1,6 @@
 import axios from 'axios'
-const GET_USERS_URL = 'http://127.0.0.1:5000/api/v1/users'
+const BASE_URL =  import.meta.env.VITE_BASE_URL
+const GET_USERS_URL = `${BASE_URL}/api/v1/users`
 export async function getAllUsers(){
     try{
         const response = await axios.get(GET_USERS_URL,{
