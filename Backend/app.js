@@ -11,26 +11,19 @@ dotenv.config({ path: './config.env' });
 
 const app = express();
 
+
 const corsOptions = {
   origin: [
     "http://127.0.0.1:5173",
     "https://notes-scribe-mu.vercel.app"
   ],
   credentials: true,
-  methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS",
-  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
 };
-
-
-
-
-
-
 app.use(cors(corsOptions));
 
 
-
-
+app.use(express.json());
+app.use(cookieParser());
 
 
 app.set('trust proxy', 1);
@@ -43,22 +36,27 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
-// Security & middleware
+
 app.use(helmet());
 app.use(hpp());
 
-app.use(morgan('dev'));
-app.use(express.json());
-app.use(cookieParser());
 
-// Health check route
+app.use(morgan('dev'));
+
+
 app.get('/', (req, res) => {
   res.send('Backend is running 🚀');
 });
 
-// Routers
+
 app.use('/api/v1/account', require('./Routes/authRoute'));
 app.use('/api/v1/users', require('./Routes/userRoute'));
 app.use('/api/v1/notes', require('./Routes/notesRoute'));
+
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ status: "error", message: err.message });
+});
 
 module.exports = app;
