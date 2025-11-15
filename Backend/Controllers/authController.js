@@ -65,6 +65,7 @@ async function Login(req, res) {
     const token = signToken(user._id);
 
 const isDev = process.env.NODE_ENV !== "production";
+console.log('isDev',isDev)
 
 res.cookie("jwt", token, {
   httpOnly: true,
