@@ -11,12 +11,10 @@ dotenv.config({ path: './config.env' });
 
 const app = express();
 
-// CORS setup - put it at the top, before other middlewares
-// Apply CORS for all routes
 app.use(cors({
-  origin: [ "*"
-    // "http://127.0.0.1:5173",
-    // "https://notes-scribe-mu.vercel.app"
+  origin: [
+    "http://127.0.0.1:5173",
+    "https://notes-scribe-mu.vercel.app"
   ],
   credentials: true,
   methods: ["GET", "POST", "PATCH", "DELETE", "PUT", "OPTIONS"],
