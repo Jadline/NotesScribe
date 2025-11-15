@@ -6,14 +6,17 @@ dotenv.config({ path: "./config.env" });
 
 async function sendEmail(options) {
   try {
-    // 1️⃣ Create a transporter
+   
     const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD,
-      },
-    });
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true, 
+    auth: {
+    user: process.env.EMAIL_USERNAME,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
+
 
    
     const mailOptions = {
