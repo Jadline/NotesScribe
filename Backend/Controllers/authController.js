@@ -20,15 +20,16 @@ async function SignUp(req, res) {
 
     const token = signToken(user._id);
 
-    const isDev = process.env.NODE_ENV !== 'production';
-    console.log('isDev',isDev)
+   const isDev = process.env.NODE_ENV !== "production";
 
 res.cookie("jwt", token, {
-  expires: new Date(Date.now() + 90*24*60*60*1000),
   httpOnly: true,
-  secure: isDev ? false : true,         // must be false on HTTP
-  sameSite: isDev ? 'lax' : 'none'       // Lax works for dev cross-site requests
+  secure: !isDev,
+  sameSite: isDev ? "lax" : "none",
+  domain: isDev ? "127.0.0.1" : "notesscribe-1.onrender.com",
+  expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000)
 });
+
     res.status(201).json({
       status: "success",
       token,
@@ -63,14 +64,16 @@ async function Login(req, res) {
     }
     const token = signToken(user._id);
 
- const isDev = process.env.NODE_ENV !== 'production';
+const isDev = process.env.NODE_ENV !== "production";
 
 res.cookie("jwt", token, {
-  expires: new Date(Date.now() + 90*24*60*60*1000),
   httpOnly: true,
-  secure: isDev ? false : true,          // must be false on HTTP
-  sameSite: isDev ? 'lax'  : 'none'       // Lax works for dev cross-site requests
+  secure: !isDev,
+  sameSite: isDev ? "lax" : "none",
+  domain: isDev ? "127.0.0.1" : "notesscribe-1.onrender.com",
+  expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000)
 });
+
     res.status(200).json({
       status: "success",
       token,
