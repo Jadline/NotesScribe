@@ -24,7 +24,7 @@ async function SignUp(req, res) {
 
 res.cookie("jwt", token, {
   httpOnly: true,
-   secure: isDev ? false : true,
+  secure: !isDev,  
   sameSite: isDev ? "lax" : "none",
   expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
 });
@@ -68,7 +68,7 @@ const isDev = process.env.NODE_ENV !== "production";
 
 res.cookie("jwt", token, {
   httpOnly: true,
-  secure: isDev ? false : true,
+   secure: !isDev,  
   sameSite: isDev ? "lax" : "none",
   expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
 });
