@@ -3,10 +3,10 @@ import NoteCard from "../components/NoteCard";
 import { useUsers } from "../contexts/UserContext";
 
 const spans = [
-  { col: 3, row: 1 },
-  { col: 3, row: 1},
-  { col: 2, row: 2},
-  { col: 3, row: 2 },
+  { col: 3,},
+  { col: 2},
+  { col: 2},
+  { col: 3},
 ];
 const colors = [
   '	#3d5731',
@@ -28,8 +28,8 @@ export default function UsersNotes() {
     const { userNotes,isLoadingUserNotes,userNotesError,allNotes,isLoadingAllNotes,
             allnotesError} = useUsers()
 
-    if(isLoadingUserNotes || isLoadingAllNotes) return <p>is Loading notes ...</p>
-    if(userNotesError || allnotesError) return <p>There was an error loading notes</p>
+    if(isLoadingUserNotes || isLoadingAllNotes) return <p className='text-white'>is Loading notes ...</p>
+    if(userNotesError || allnotesError) return <p className='text-white'>There was an error loading notes</p>
 
     const notes = userInfo?.role === 'user' ? userNotes : userInfo?.role === 'admin' ? allNotes : []
   
@@ -46,7 +46,7 @@ export default function UsersNotes() {
 Create a user or admin account to start your personalized note-taking journey. 
 
         </p> }
-      <div className="mt-10 grid grid-cols-1 p-4  gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
+      <div className="mt-10 grid grid-cols-1 p-4  gap-4 sm:mt-16 lg:grid-cols-4 lg:grid-rows-2">
       
             {notes?.map((userNote,index) => {
                 const span = spans[index % spans.length]
