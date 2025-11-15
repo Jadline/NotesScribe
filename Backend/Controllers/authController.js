@@ -24,8 +24,10 @@ async function SignUp(req, res) {
 
 res.cookie("jwt", token, {
   httpOnly: true,
-  secure: !isDev,  
-  sameSite: isDev ? "lax" : "none",
+  // secure: !isDev,  
+  // sameSite: isDev ? "lax" : "none",
+   secure: true,          
+  sameSite: "none", 
   expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
 });
 
@@ -69,8 +71,10 @@ console.log('isDev',isDev)
 
 res.cookie("jwt", token, {
   httpOnly: true,
-   secure: !isDev,  
-  sameSite: isDev ? "lax" : "none",
+  //  secure: !isDev,  
+  // sameSite: isDev ? "lax" : "none",
+  secure: true,          
+  sameSite: "none",     
   expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
 });
 
